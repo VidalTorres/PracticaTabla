@@ -21,6 +21,7 @@ export const Datos = () => {
               <td>Código</td>
               <td>Descripción</td>
               <td>Precio</td>
+              <td>Borrar</td>
               </tr>
         </thead>
         <tbody>
