@@ -5,6 +5,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: dimgray;
 }
 
 code {
@@ -16,7 +17,29 @@ h1{
   text-align: center;
 }
 
-.tabla{
-  border-color: black;
-  border-radius: 60px;
+table ,td , th{
+  margin: auto; 
+  border: 3px solid black;
+  border-radius: 5px;
+  background-color: dimgrey;
 }
+
+button{
+  background-color: red;
+  border-radius: 3px;
+}
+
+div{
+  background-color: dimgray;
+}
+
+footer{
+  background-color: whitesmoke;
+}
+
+p{
+  text-align: center;
+  font-size: large;
+
+}
+

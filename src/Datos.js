@@ -1,39 +1,68 @@
-import React, { useEffect, useState } from "react"
-import './index.css'
+import React, {useEffect, useState} from 'react';
+import DataTable from 'react-data-table-component';
+import './index.css';
 
-export const Datos = () => {
-  const [producto, setProducto] = useState([])
 
-  const fetchData = async () => {
-    const response = await fetch("http://scratchya.com.ar/react/datos.php")
-    const data = await response.json()
-    setProducto(data)
+function App() {
+  const [precio, setPrecio] = useState([])
+  const url ='http://scratchya.com.ar/react/datos.php'
+  const verData = async ()=>{
+    const repuesta = await fetch(url)
+    const data = await repuesta.json()
+    console.log(data)
+    setPrecio(data)
   }
-
-  useEffect(() => {
-    fetchData()
+  useEffect( ()=>{
+    verData()
   }, [])
-  
+
+ 
+
+  const columnas = [
+
+    {
+      name: 'Codigo',
+      selector: row => row.codigo
+    },
+    {
+      name: 'Descripcion',
+      selector: row => row.descripcion
+    },
+    {
+      name: ' Precio',
+      selector: row => row.precio
+    },
+	{
+		name: ' Borrar datos',
+		selector: row => <button onClick={ () =>  {
+      const index = precio.map(dato => {
+        return dato.codigo === row.codigo;
+      })
+
+      precio.splice(index, 1);
+      var newPrecio = [];
+      Object.assign(newPrecio, precio);
+      setPrecio(newPrecio);
+    }}>Borrar</button>
+	},
+	
+	
+  ]
+
+
   return (
-      <table className="tabla">
-          <thead>
-              <tr>
-              <td>Código</td>
-              <td>Descripción</td>
-              <td>Precio</td>
-              <td>Borrar</td>
-              </tr>
-        </thead>
-        <tbody>
-          {producto.map(producto => (
-            <tr>
-              <td>{producto.codigo}</td>
-              <td>{producto.descripcion}</td>
-              <td>{producto.precio}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-  )
+    <div className="App">
+      <h1>Tabla de datos</h1>
+      <DataTable
+      columns={columnas}
+      data={precio}
+      />
+      <footer>
+        <p>Jorge Vidal Torres Dzib</p>
+      </footer>
+    </div>
+  );
 }
+
+export default App;
 
